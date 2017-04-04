@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Kubaceg_Menu>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Kubaceg_Menu>
+    </modules>
+</config>
