@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <cms>
+            <children>
+                <kubaceg_menu translate="title" module="kubaceg_menu">
+                    <sort_order>10</sort_order>
+                    <title>Menus</title>
+                    <action>adminhtml/menu</action>
+                </kubaceg_menu>
+            </children>
+        </cms>
+    </menu>
+</config>

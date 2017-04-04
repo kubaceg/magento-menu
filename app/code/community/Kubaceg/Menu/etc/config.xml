@@ -38,4 +38,15 @@
             </kubaceg_menu>
         </helpers>
     </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <kubaceg_menu before="Mage_Adminhtml">Kubaceg_Menu_Adminhtml</kubaceg_menu>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>
