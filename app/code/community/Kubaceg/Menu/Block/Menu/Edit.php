@@ -7,7 +7,6 @@ class Kubaceg_Menu_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Cont
 {
     public function __construct()
     {
-        // $this->_objectId = 'id';
         parent::__construct();
         $this->_blockGroup = 'kubaceg_menu';
         $this->_controller = 'menu';
@@ -34,12 +33,12 @@ class Kubaceg_Menu_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Cont
 
     protected function _getModel()
     {
-        return Mage::registry('current_model');
+        return Mage::registry('menu_model');
     }
 
     protected function _getModelTitle()
     {
-        return 'Menus';
+        return 'Menu';
     }
 
     public function getHeaderText()

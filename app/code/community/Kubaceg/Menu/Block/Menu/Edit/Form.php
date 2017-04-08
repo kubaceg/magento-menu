@@ -3,12 +3,15 @@
 /**
  * @author Jakub Cegiełka <kuba.ceg@gmail.com>
  */
+
+use Kubaceg_Menu_Model_Resource_Menu as Menu;
+
 class Kubaceg_Menu_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 
     protected function _getModel()
     {
-        return Mage::registry('current_model');
+        return Mage::registry('menu_model');
     }
 
     protected function _getHelper()
@@ -24,7 +27,7 @@ class Kubaceg_Menu_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
     protected function _prepareForm()
     {
         $model = $this->_getModel();
-        $modelTitle = $this->_getModelTitle();
+
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
             'action' => $this->getUrl('*/*/save'),
@@ -32,7 +35,7 @@ class Kubaceg_Menu_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
         ));
 
         $fieldset = $form->addFieldset('base_fieldset', array(
-            'legend' => $this->_getHelper()->__("$modelTitle Information"),
+            'legend' => $this->_getHelper()->__("Menu Information"),
             'class' => 'fieldset-wide',
         ));
 
@@ -43,23 +46,45 @@ class Kubaceg_Menu_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
             ));
         }
 
-//        $fieldset->addField('name', 'text' /* select | multiselect | hidden | password | ...  */, array(
-//            'name'      => 'name',
-//            'label'     => $this->_getHelper()->__('Label here'),
-//            'title'     => $this->_getHelper()->__('Tooltip text here'),
-//            'required'  => true,
-//            'options'   => array( OPTION_VALUE => OPTION_TEXT, ),                 // used when type = "select"
-//            'values'    => array(array('label' => LABEL, 'value' => VALUE), ),    // used when type = "multiselect"
-//            'style'     => 'css rules',
-//            'class'     => 'css classes',
-//        ));
-//          // custom renderer (optional)
-//          $renderer = $this->getLayout()->createBlock('Block implementing Varien_Data_Form_Element_Renderer_Interface');
-//          $field->setRenderer($renderer);
+        $fieldset->addField(Menu::NAME_COLUMN, 'text', array(
+            'name' => Menu::NAME_COLUMN,
+            'label' => $this->_getHelper()->__('Name'),
+            'title' => $this->_getHelper()->__('Name'),
+            'required' => true,
+        ));
 
-//      // New Form type element (extends Varien_Data_Form_Element_Abstract)
-//        $fieldset->addType('custom_element','MyCompany_MyModule_Block_Form_Element_Custom');  // you can use "custom_element" as the type now in ::addField([name], [HERE], ...)
+        $fieldset->addField(Menu::IDENTIFIER_COLUMN, 'text', array(
+            'name' => Menu::IDENTIFIER_COLUMN,
+            'label' => $this->_getHelper()->__('Identifier'),
+            'title' => $this->_getHelper()->__('Identifier'),
+            'required' => true,
+        ));
 
+        $fieldset->addField(Menu::IS_ACTIVE_COLUMN, 'select', array(
+            'name' => Menu::IS_ACTIVE_COLUMN,
+            'label' => $this->_getHelper()->__('Active'),
+            'title' => $this->_getHelper()->__('Active'),
+            'values' => [0 => 'No', 1 => 'Yes'],
+            'required' => true,
+        ));
+
+        if (!Mage::app()->isSingleStoreMode()) {
+            $field = $fieldset->addField(Menu::STORE_ID_COLUMN, 'select', array(
+                'name' => Menu::STORE_ID_COLUMN,
+                'label' => $this->_getHelper()->__('Store View'),
+                'title' => $this->_getHelper()->__('Store View'),
+                'required' => true,
+                'values' => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, true),
+            ));
+            $renderer = $this->getLayout()->createBlock('adminhtml/store_switcher_form_renderer_fieldset_element');
+            $field->setRenderer($renderer);
+        } else {
+            $fieldset->addField(Menu::STORE_ID_COLUMN, 'hidden', array(
+                'name' => 'stores[]',
+                'value' => Mage::app()->getStore(true)->getId(),
+            ));
+            $model->setStoreId(Mage::app()->getStore(true)->getId());
+        }
 
         if ($model) {
             $form->setValues($model->getData());
@@ -69,5 +94,4 @@ class Kubaceg_Menu_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 
         return parent::_prepareForm();
     }
-
 }

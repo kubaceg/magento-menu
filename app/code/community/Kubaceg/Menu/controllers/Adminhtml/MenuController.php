@@ -24,11 +24,42 @@ class Kubaceg_Menu_Adminhtml_MenuController extends Mage_Adminhtml_Controller_Ac
 
     public function newAction()
     {
+        $this->_forward('edit');
+    }
+
+    public function editAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        if($id) {
+            Mage::register('menu_model', Mage::getModel('kubaceg_menu/menu')->load($id));
+        }
+
         $this->loadLayout();
         $this->_addContent($this->getLayout()
-            ->createBlock('kuba_ceg'))
-            ->_addLeft($this->getLayout()
-                ->createBlock('pfay_films/adminhtml_films_edit_tabs');
+            ->createBlock('kubaceg_menu/menu_edit'));
         $this->renderLayout();
+    }
+
+    public function saveAction()
+    {
+        if ($postData = $this->getRequest()->getPost()) {
+            $model = Mage::getSingleton('kubaceg_menu/menu');
+            $model->setData($postData);
+
+            try {
+                $model->save();
+
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The menu has been saved.'));
+                $this->_redirect('*/*/');
+
+                return;
+            } catch (Mage_Core_Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($this->__('An error occurred while saving this menu.'));
+            }
+
+            $this->_redirectReferer();
+        }
     }
 }
