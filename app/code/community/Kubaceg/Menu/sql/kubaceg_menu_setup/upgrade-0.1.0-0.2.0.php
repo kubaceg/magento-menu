@@ -4,6 +4,7 @@
  */
 
 use Kubaceg_Menu_Model_Resource_MenuPosition as MenuPosition;
+use Kubaceg_Menu_Model_Resource_Menu as Menu;
 
 $installer = $this;
 
@@ -23,14 +24,22 @@ $table = $installer->getConnection()
     ), 'Target')
     ->addColumn(MenuPosition::PARENT_ID_COLUMN, Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'unsigned' => true,
-        'nullable' => false,
+        'nullable' => true,
     ), 'Parent')
     ->addColumn(MenuPosition::POSITION_COLUMN, Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'nullable' => true,
     ), 'Position')
-    ->addForeignKey($installer->getFkName(MenuPosition::TABLE_ALIAS, MenuPosition::TARGET_COLUMN,
+    ->addColumn(MenuPosition::MENU_ID_COLUMN, Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'unsigned' => true,
+        'nullable' => false,
+    ), 'Menu id')
+    ->addForeignKey($installer->getFkName(MenuPosition::TABLE_ALIAS, MenuPosition::PARENT_ID_COLUMN,
         MenuPosition::TABLE_ALIAS, MenuPosition::ID_COLUMN),
         MenuPosition::PARENT_ID_COLUMN, $installer->getTable(MenuPosition::TABLE_ALIAS), MenuPosition::ID_COLUMN,
-        Varien_Db_Ddl_Table::ACTION_NO_ACTION, Varien_Db_Ddl_Table::ACTION_NO_ACTION);
+        Varien_Db_Ddl_Table::ACTION_NO_ACTION, Varien_Db_Ddl_Table::ACTION_NO_ACTION)
+    ->addForeignKey($installer->getFkName(MenuPosition::TABLE_ALIAS, MenuPosition::MENU_ID_COLUMN,
+        Menu::TABLE_ALIAS, Menu::ID_COLUMN),
+        MenuPosition::MENU_ID_COLUMN, $installer->getTable(Menu::TABLE_ALIAS), Menu::ID_COLUMN,
+        Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
 
 $installer->getConnection()->createTable($table);

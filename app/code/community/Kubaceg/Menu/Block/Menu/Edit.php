@@ -24,6 +24,7 @@ class Kubaceg_Menu_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Cont
                 editForm.submit($('edit_form').action+'back/edit/');
             }
         ";
+
     }
 
     protected function _getHelper()

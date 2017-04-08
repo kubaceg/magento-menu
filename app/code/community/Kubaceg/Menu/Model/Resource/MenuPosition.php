@@ -11,6 +11,7 @@ class Kubaceg_Menu_Model_Resource_MenuPosition extends Mage_Core_Model_Resource_
     const TARGET_COLUMN = 'target';
     const PARENT_ID_COLUMN = 'parent_id';
     const POSITION_COLUMN = 'position';
+    const MENU_ID_COLUMN = 'menu_id';
 
     protected function _construct()
     {
