@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Kubaceg_Menu>
-            <version>0.1.0</version>
+            <version>0.2.0</version>
         </Kubaceg_Menu>
     </modules>
     <global>
@@ -17,6 +17,9 @@
                     <menu>
                         <table>kubaceg_menu</table>
                     </menu>
+                    <menu_position>
+                        <table>kubaceg_menu_position</table>
+                    </menu_position>
                 </entities>
             </kubaceg_menu_resource>
         </models>
