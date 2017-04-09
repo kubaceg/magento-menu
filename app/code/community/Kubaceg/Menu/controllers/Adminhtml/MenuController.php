@@ -7,10 +7,7 @@ class Kubaceg_Menu_Adminhtml_MenuController extends Mage_Adminhtml_Controller_Ac
 {
     public function indexAction()
     {
-        $this->_title($this->__('Cms'))->_title($this->__('Menus'));
         $this->loadLayout();
-        $this->_setActiveMenu('cms/kubaceg_menu');
-        $this->_addContent($this->getLayout()->createBlock('kubaceg_menu/menu'));
         $this->renderLayout();
     }
 
@@ -35,16 +32,6 @@ class Kubaceg_Menu_Adminhtml_MenuController extends Mage_Adminhtml_Controller_Ac
         }
 
         $this->loadLayout();
-        $this->_addContent($this->getLayout()
-            ->createBlock('kubaceg_menu/menu_edit'));
-
-        if ($id) {
-            $this->_addContent(
-                $this->getLayout()
-                    ->createBlock('kubaceg_menu/menuPosition_menuPositionList')
-            );
-        }
-
         $this->renderLayout();
     }
 
