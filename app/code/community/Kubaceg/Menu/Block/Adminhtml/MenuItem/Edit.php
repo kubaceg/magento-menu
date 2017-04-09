@@ -3,13 +3,13 @@
 /**
  * @author Jakub Cegiełka <kuba.ceg@gmail.com>
  */
-class Kubaceg_Menu_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Kubaceg_Menu_Block_Adminhtml_MenuItem_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
     {
         parent::__construct();
         $this->_blockGroup = 'kubaceg_menu';
-        $this->_controller = 'adminhtml_menu';
+        $this->_controller = 'adminhtml_menuItem';
         $this->_mode = 'edit';
         $modelTitle = $this->_getModelTitle();
         $this->_updateButton('save', 'label', $this->_getHelper()->__("Save $modelTitle"));
@@ -22,12 +22,12 @@ class Kubaceg_Menu_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget
 
     protected function _getModel()
     {
-        return Mage::registry('menu_model');
+        return Mage::registry('menu_item_model');
     }
 
     protected function _getModelTitle()
     {
-        return 'Menu';
+        return 'Menu item';
     }
 
     public function getHeaderText()
@@ -40,7 +40,6 @@ class Kubaceg_Menu_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget
             return $this->_getHelper()->__("New $modelTitle");
         }
     }
-
 
     /**
      * Get URL for back (reset) button

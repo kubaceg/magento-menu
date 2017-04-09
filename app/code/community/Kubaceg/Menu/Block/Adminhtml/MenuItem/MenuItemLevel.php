@@ -3,7 +3,7 @@
  * @author Jakub Cegiełka <kuba.ceg@gmail.com>
  */
 
-use Kubaceg_Menu_Model_Resource_MenuPosition as MenuPosition;
+use Kubaceg_Menu_Model_Resource_MenuItem as MenuItem;
 
 class Kubaceg_Menu_Block_Adminhtml_MenuItem_MenuItemLevel extends Mage_Adminhtml_Block_Abstract
 {
@@ -25,7 +25,7 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_MenuItemLevel extends Mage_Adminhtml
      */
     public function getEditUrl($item)
     {
-        return $this->getUrl('admin/menuItem/edit/', ['id' => $item[MenuPosition::ID_COLUMN]]);
+        return $this->getUrl('adminhtml/menuItem/edit/', ['id' => $item[MenuItem::ID_COLUMN]]);
     }
 
     /**
@@ -34,6 +34,6 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_MenuItemLevel extends Mage_Adminhtml
      */
     public function getDeleteUrl($item)
     {
-        return $this->getUrl('admin/menuItem/delete/', ['id' => $item[MenuPosition::ID_COLUMN]]);
+        return $this->getUrl('adminhtml/menuItem/delete/', ['id' => $item[MenuItem::ID_COLUMN]]);
     }
 }
