@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="header">
+            <block name="main_menu" type="kubaceg_menu/menu" template="kubaceg_menu/menu.phtml">
+                <action method="setData"><name>menu_code</name><value>main_menu</value></action>
+                <action method="setData"><name>menu_item_block_name</name><value>menu_level</value></action>
+                <block name="menu_level" type="kubaceg_menu/menuLevel" template="kubaceg_menu/menuLevel.phtml"/>
+            </block>
+        </reference>
+    </default>
+</layout>

@@ -1,25 +1,35 @@
 <?php
-
 /**
  * @author Jakub Cegiełka <kuba.ceg@gmail.com>
  */
-class Kubaceg_Menu_Block_Menu extends Mage_Adminhtml_Block_Widget_Grid_Container
+
+use Kubaceg_Menu_Model_Resource_Menu as Menu;
+
+class Kubaceg_Menu_Block_Menu extends Mage_Core_Block_Template
 {
+    protected $menu = null;
 
-    public function __construct()
+    public function getMenu()
     {
-        $this->_blockGroup = 'kubaceg_menu';
-        $this->_controller = 'menu';
-        $this->_headerText = $this->__('Menus');
-        $this->_addButtonLabel = $this->__('Add menu');
+        if (empty($this->menu)) {
+            $this->menu = Mage::getModel('kubaceg_menu/menu')
+                ->getCollection()
+                ->addFieldToFilter(Menu::STORE_ID_COLUMN, Mage::app()->getStore()->getId())
+                ->addFieldToFilter(Menu::IS_ACTIVE_COLUMN, 1)
+                ->addFieldToFilter(Menu::IDENTIFIER_COLUMN, $this->getMenuCode())
+                ->getFirstItem();
+        }
 
-        parent::__construct();
+        return $this->menu;
     }
 
-    public function getCreateUrl()
+    public function getMenuLevelHtml()
     {
-        return $this->getUrl('*/*/new');
-    }
+        $menuArray = Mage::helper('kubaceg_menu/menuItems')->getMenuItemsArray($this->getMenu()->getId());
 
+        return $this->getLayout()
+            ->getBlock($this->getMenuItemBlockName())
+            ->setData('items', $menuArray)
+            ->toHtml();
+    }
 }
-

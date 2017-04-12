@@ -1,0 +1,11 @@
+<?php /* @var $this Kubaceg_Menu_Block_MenuLevel */ ?>
+<ul>
+    <?php foreach ($this->getItems() as $item): ?>
+        <li>
+            <a href="<?php echo $item['target'] ?>"><?php echo $item['title'] ?></a>
+            <?php if (!empty($item['children'])) {
+                echo $this->getNextMenuLevelHtml($item['children']);
+            } ?>
+        </li>
+    <?php endforeach; ?>
+</ul>

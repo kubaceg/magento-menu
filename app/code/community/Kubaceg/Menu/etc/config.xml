@@ -61,4 +61,13 @@
             </updates>
         </layout>
     </adminhtml>
+    <frontend>
+        <layout>
+            <updates>
+                <kubaceg_menu>
+                    <file>kubaceg_menu.xml</file>
+                </kubaceg_menu>
+            </updates>
+        </layout>
+    </frontend>
 </config>
