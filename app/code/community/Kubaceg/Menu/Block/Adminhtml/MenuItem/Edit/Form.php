@@ -101,7 +101,6 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_Edit_Form extends Mage_Adminhtml_Blo
      */
     protected function getParentIds()
     {
-        $parentIds = [$this->_getHelper()->__('No parent')];
         $items = Mage::helper('kubaceg_menu/menuItems')->getMenuItemsArray($this->getMenuId());
 
         return $this->formattedItems($items, 0, []);
@@ -115,6 +114,7 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_Edit_Form extends Mage_Adminhtml_Blo
      */
     protected function formattedItems($items, $level = 0, $itemsArray = [])
     {
+        $itemsArray[0] = $this->_getHelper()->__('No parent menu item');
         foreach ($items as $item) {
             $itemsArray[$item[MenuItem::ID_COLUMN]] = str_repeat('-', $level) . $item[MenuItem::TITLE_COLUMN];
             if(!empty($item['children'])) {

@@ -36,7 +36,7 @@ $table = $installer->getConnection()
     ->addForeignKey($installer->getFkName(MenuItem::TABLE_ALIAS, MenuItem::PARENT_ID_COLUMN,
         MenuItem::TABLE_ALIAS, MenuItem::ID_COLUMN),
         MenuItem::PARENT_ID_COLUMN, $installer->getTable(MenuItem::TABLE_ALIAS), MenuItem::ID_COLUMN,
-        Varien_Db_Ddl_Table::ACTION_NO_ACTION, Varien_Db_Ddl_Table::ACTION_NO_ACTION)
+        Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey($installer->getFkName(MenuItem::TABLE_ALIAS, MenuItem::MENU_ID_COLUMN,
         Menu::TABLE_ALIAS, Menu::ID_COLUMN),
         MenuItem::MENU_ID_COLUMN, $installer->getTable(Menu::TABLE_ALIAS), Menu::ID_COLUMN,

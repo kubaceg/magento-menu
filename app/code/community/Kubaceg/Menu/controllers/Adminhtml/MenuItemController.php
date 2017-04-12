@@ -30,15 +30,31 @@ class Kubaceg_Menu_Adminhtml_MenuItemController extends Mage_Adminhtml_Controlle
             try {
                 $model->save();
 
-                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The menu item has been saved.'));
+                $this->_getSession()->addSuccess($this->__('The menu item has been saved.'));
                 $this->_redirect('adminhtml/menu/edit', ['id' => $postData['menu_id']]);
 
                 return;
             } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                $this->_getSession()->addError($e->getMessage());
             }
 
             $this->_redirectReferer();
         }
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        if($id) {
+            try {
+                $menuItem = Mage::getModel('kubaceg_menu/menuItem')->load($id);
+                $menuItem->delete();
+                $this->_getSession()->addSuccess($this->__('The menu item has been deleted.'));
+            } catch (Exception $e) {
+                $this->_getSession()->addError($e->getMessage());
+            }
+        }
+
+        $this->_redirectReferer();
     }
 }
