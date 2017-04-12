@@ -1,0 +1,19 @@
+<?php /* @var $this Kubaceg_Menu_Block_Adminhtml_MenuItem_MenuItemList */ ?>
+<?php if($this->getMenuModel()): ?>
+<h1><?php echo $this->__('Menu') ?></h1>
+<button class="scalable save" onclick="setLocation('<?php echo $this->getNewUrl() ?>')"><span><?php echo $this->__('New item')?></span></button>
+<div class="kubaceg-menulist">
+    <?php $menuItems = $this->getMenuItemsArray(); ?>
+    <?php echo $this->getMenuLevelHtml($menuItems); ?>
+<?php endif ?>
+</div>
+<style>
+    .kubaceg-menulist {
+        margin-top: 2em;
+    }
+
+    .kubaceg-menulist ul {
+        list-style: circle;
+        margin-left: 15px;
+    }
+</style>

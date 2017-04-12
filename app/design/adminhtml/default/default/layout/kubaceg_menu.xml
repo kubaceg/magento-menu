@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_menu_index>
+        <referense name="head">
+            <action method="setTitle" translate="title"><title>Menu</title></action>
+        </referense>
+        <reference name="menu">
+            <action method="setActive"><menupath>cms/kubaceg_menu</menupath></action>
+        </reference>
+        <reference name="content">
+            <block type="kubaceg_menu/adminhtml_menu" name="menu_list"/>
+        </reference>
+    </adminhtml_menu_index>
+
+    <adminhtml_menu_edit>
+        <referense name="head">
+            <action method="setTitle" translate="title"><title>Menu</title></action>
+        </referense>
+        <reference name="menu">
+            <action method="setActive"><menupath>cms/kubaceg_menu</menupath></action>
+        </reference>
+        <reference name="content">
+            <block type="kubaceg_menu/adminhtml_menu_edit" name="menu_edit"/>
+            <block type="kubaceg_menu/adminhtml_menuItem_menuItemList" name="menu_item"
+                   template="kubaceg_menu/menu.phtml"/>
+        </reference>
+    </adminhtml_menu_edit>
+
+    <adminhtml_menuitem_edit>
+        <referense name="head">
+            <action method="setTitle" translate="title"><title>Menu item</title></action>
+        </referense>
+        <reference name="menu">
+            <action method="setActive"><menupath>cms/kubaceg_menu</menupath></action>
+        </reference>
+        <reference name="content">
+            <block type="kubaceg_menu/adminhtml_menuItem_edit" name="menu_item_edit"/>
+        </reference>
+    </adminhtml_menuitem_edit>
+</layout>

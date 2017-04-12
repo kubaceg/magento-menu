@@ -1,0 +1,11 @@
+<?php /* @var $this Kubaceg_Menu_Block_Adminhtml_MenuItem_MenuItemLevel */ ?>
+<ul>
+    <?php foreach($this->getItems() as $item): ?>
+        <li>
+            <?php echo $item['title']; ?> <a href="<?php echo $this->getEditUrl($item)?>">Edit</a> <a href="#" onclick="deleteConfirm('<?php echo $this->__('Do you really want delete this item and all subitems?') ?>', '<?php echo $this->getDeleteUrl($item)?>')">Delete</a>
+            <?php if(!empty($item['children'])) {
+                echo $this->getMenuLevelHtml($item['children']);
+            } ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
