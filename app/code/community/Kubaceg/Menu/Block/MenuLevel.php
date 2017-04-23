@@ -12,4 +12,9 @@ class Kubaceg_Menu_Block_MenuLevel extends Mage_Core_Block_Template
             ->setData('items', $children)
             ->toHtml();
     }
+
+    public function getItemUrl($item)
+    {
+        return Mage::getBaseUrl() . ltrim($item['target'], '/');
+    }
 }

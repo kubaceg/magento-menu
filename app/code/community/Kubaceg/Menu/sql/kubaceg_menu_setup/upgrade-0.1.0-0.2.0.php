@@ -16,8 +16,11 @@ $table = $installer->getConnection()
         'nullable' => false,
         'primary' => true,
     ), 'Id')
-    ->addColumn(MenuItem::TITLE_COLUMN, Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
+    ->addColumn(MenuItem::NAME_COLUMN, Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false,
+    ), 'Title')
+    ->addColumn(MenuItem::TITLE_COLUMN, Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
+        'nullable' => true,
     ), 'Title')
     ->addColumn(MenuItem::TARGET_COLUMN, Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false,

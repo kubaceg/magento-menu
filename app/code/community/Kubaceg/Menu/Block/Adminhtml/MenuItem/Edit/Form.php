@@ -46,11 +46,18 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_Edit_Form extends Mage_Adminhtml_Blo
             ));
         }
 
+        $fieldset->addField(MenuItem::NAME_COLUMN, 'text', array(
+            'name' => MenuItem::NAME_COLUMN,
+            'label' => $this->_getHelper()->__('Name'),
+            'title' => $this->_getHelper()->__('Name'),
+            'required' => true,
+        ));
+
         $fieldset->addField(MenuItem::TITLE_COLUMN, 'text', array(
             'name' => MenuItem::TITLE_COLUMN,
             'label' => $this->_getHelper()->__('Title'),
             'title' => $this->_getHelper()->__('Title'),
-            'required' => true,
+            'required' => false,
         ));
 
         $fieldset->addField(MenuItem::TARGET_COLUMN, 'text', array(
@@ -58,6 +65,14 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_Edit_Form extends Mage_Adminhtml_Blo
             'label' => $this->_getHelper()->__('Target URL'),
             'title' => $this->_getHelper()->__('Target URL'),
             'required' => true,
+        ));
+
+        $fieldset->addField(MenuItem::POSITION_COLUMN, 'text', array(
+            'name' => MenuItem::POSITION_COLUMN,
+            'label' => $this->_getHelper()->__('Position'),
+            'title' => $this->_getHelper()->__('Position'),
+            'class' => 'validate-number',
+            'required' => false,
         ));
 
         $fieldset->addField(MenuItem::PARENT_ID_COLUMN, 'select', array(
@@ -116,7 +131,7 @@ class Kubaceg_Menu_Block_Adminhtml_MenuItem_Edit_Form extends Mage_Adminhtml_Blo
     {
         $itemsArray[0] = $this->_getHelper()->__('No parent menu item');
         foreach ($items as $item) {
-            $itemsArray[$item[MenuItem::ID_COLUMN]] = str_repeat('-', $level) . $item[MenuItem::TITLE_COLUMN];
+            $itemsArray[$item[MenuItem::ID_COLUMN]] = str_repeat('-', $level) . $item[MenuItem::NAME_COLUMN];
             if(!empty($item['children'])) {
                 $itemsArray = $this->formattedItems($item['children'], $level + 1, $itemsArray);
             }

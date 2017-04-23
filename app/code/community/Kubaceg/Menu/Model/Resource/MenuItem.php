@@ -7,6 +7,7 @@ class Kubaceg_Menu_Model_Resource_MenuItem extends Mage_Core_Model_Resource_Db_A
     const TABLE_ALIAS = 'kubaceg_menu/menu_item';
 
     const ID_COLUMN = 'menu_item_id';
+    const NAME_COLUMN = 'name';
     const TITLE_COLUMN = 'title';
     const TARGET_COLUMN = 'target';
     const PARENT_ID_COLUMN = 'parent_id';

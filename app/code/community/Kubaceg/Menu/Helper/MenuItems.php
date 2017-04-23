@@ -14,20 +14,27 @@ class Kubaceg_Menu_Helper_MenuItems extends Mage_Core_Helper_Abstract
     public function getMenuItemsArray($menuId)
     {
         $menuItems = $this->getMenuItems($menuId);
+        $position = 1;
         $array = [];
         foreach ($menuItems as $menuItem) {
-            $array[$menuItem->getId()] = $menuItem->getData();
+            $array[$position++] = $menuItem->getData();
         }
+        ksort($array);
 
         return $this->buildMenuTree($array);
     }
 
+    /**
+     * @param $menuId
+     * @return array
+     */
     protected function getMenuItems($menuId)
     {
         $menuPositions = Mage::getModel('kubaceg_menu/menuItem')
             ->getCollection()
             ->addFieldToFilter(MenuItem::MENU_ID_COLUMN, $menuId)
-            ->setOrder(MenuItem::PARENT_ID_COLUMN, 'ASC');
+            ->sortItems();
+
 
         return $menuPositions;
     }
@@ -42,8 +49,8 @@ class Kubaceg_Menu_Helper_MenuItems extends Mage_Core_Helper_Abstract
         $tree = array();
 
         foreach ($elements as $element) {
-            if ($element['parent_id'] == $parentId) {
-                $children = $this->buildMenuTree($elements, $element['menu_item_id']);
+            if ($element[MenuItem::PARENT_ID_COLUMN] == $parentId) {
+                $children = $this->buildMenuTree($elements, $element[MenuItem::ID_COLUMN]);
                 if ($children) {
                     $element['children'] = $children;
                 }

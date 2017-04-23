@@ -9,6 +9,14 @@ class Kubaceg_Menu_Block_Menu extends Mage_Core_Block_Template
 {
     protected $menu = null;
 
+    protected function _construct()
+    {
+        $this->addData(array(
+            'cache_lifetime' => false,
+            'cache_tags'     => array(Mage_Cms_Model_Block::CACHE_TAG),
+        ));
+    }
+
     public function getMenu()
     {
         if (empty($this->menu)) {
